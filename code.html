@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef's Warning</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
+            justify-content: center; /* Center items vertically */
+            min-height: 90vh; /* Ensure body takes up most of the viewport height */
+            font-family: sans-serif;
+            background-color: #f0f0f0; /* Light gray background */
+        }
+        img {
+            max-width: 80%; /* Responsive image width */
+            max-height: 400px; /* Limit image height */
+            height: auto; /* Maintain aspect ratio */
+            display: block; /* Prevent extra space below image */
+            margin-bottom: 20px; /* Space between image and button */
+            border-radius: 8px; /* Slightly rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            background-color: #d9534f; /* A warning-like red color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #c9302c; /* Darker red on hover */
+        }
+        button:active {
+            background-color: #ac2925; /* Even darker red when pressed */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Uh oh...</h1>
+
+    <!-- You can replace this src with any chef image URL you prefer -->
+    <img src="https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg?auto=compress&cs=tinysrgb&w=600" 
+         alt="Photo of a stressed or intense looking chef">
+
+    <button id="warningButton">What does the chef say?</button>
+
+    <script>
+        // Get the button element
+        const button = document.getElementById('warningButton');
+
+        // Function to speak the text
+        function speakWarning() {
+            // Check if the browser supports the Speech Synthesis API
+            if ('speechSynthesis' in window) {
+                // Create a new speech utterance
+                const utterance = new SpeechSynthesisUtterance("we are cooked");
+                
+                // Optional: Configure voice properties ( uncomment and adjust if needed )
+                // let voices = window.speechSynthesis.getVoices();
+                // utterance.voice = voices[0]; // Choose a specific voice
+                // utterance.pitch = 1; // Range 0 to 2
+                // utterance.rate = 0.9; // Range 0.1 to 10
+                // utterance.volume = 1; // Range 0 to 1
+                
+                // Speak the text
+                window.speechSynthesis.speak(utterance);
+                
+            } else {
+                // Fallback for browsers that don't support the API
+                alert("Sorry, your browser doesn't support text-to-speech.");
+            }
+        }
+
+        // Add an event listener to the button for the 'click' event
+        button.addEventListener('click', speakWarning);
+    </script>
+
+</body>
+</html>
